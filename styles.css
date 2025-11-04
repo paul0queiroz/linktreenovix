@@ -1,0 +1,143 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  color: #0b1020;
+  background: radial-gradient(
+      1200px 800px at 70% -10%,
+      rgba(123, 31, 162, 0.15),
+      transparent
+    ),
+    radial-gradient(
+      900px 600px at -10% 0%,
+      rgba(33, 150, 243, 0.18),
+      transparent
+    ),
+    #0a0f1c;
+  background-attachment: fixed;
+}
+
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 24px;
+  gap: 28px;
+}
+
+.brand {
+  text-align: center;
+  color: #eaf1ff;
+}
+.logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(56, 189, 248, 0.25))
+    drop-shadow(0 8px 24px rgba(168, 85, 247, 0.2));
+}
+.title {
+  margin: 12px 0 4px;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+}
+.subtitle {
+  margin: 0;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.links {
+  width: 100%;
+  max-width: 640px;
+  display: grid;
+  gap: 14px;
+}
+
+/* Card component */
+.card {
+  --bg: rgba(15, 23, 42, 0.65);
+  --bg-hover: rgba(25, 36, 66, 0.9);
+  --ring: linear-gradient(90deg, #0ea5e9, #7c3aed);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #eaf1ff;
+  background: var(--bg);
+  isolation: isolate;
+  overflow: hidden;
+  outline: none;
+  transition: background-color 220ms ease, transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: 1px;
+  background: var(--ring);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.card-label {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: lowercase;
+}
+
+/* Hover effects for desktop (pointer: fine) */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: var(--bg-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Focus/tap effects for touch/mobile */
+@media (hover: none), (pointer: coarse) {
+  .card:active,
+  .card.touch-active {
+    transform: scale(0.98);
+  }
+}
+
+.card:focus-visible {
+  background: var(--bg-hover);
+  box-shadow: 0 0 0 8px rgba(14, 165, 233, 0.15),
+    0 0 0 14px rgba(124, 58, 237, 0.1);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+.footer {
+  color: #a0b3d4;
+  opacity: 0.9;
+}
+.footer small {
+  font-size: 12px;
+}
